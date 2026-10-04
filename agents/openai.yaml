@@ -1,0 +1,6 @@
+interface:
+  display_name: "Blind RP Review · RP 盲审"
+  short_description: "Separate RP audits, frozen findings, and evidence-based adjudication"
+  default_prompt: "Use $stress-test-phd-rp to 高压审核这份 PhD RP，先锁定最强拒稿理由，再给出可验证的修改顺序。"
+policy:
+  allow_implicit_invocation: true
