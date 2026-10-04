@@ -1,60 +1,130 @@
 # Blind RP Review
 
-**Put the key claims in your research proposal to the test.**
+**Turn a PhD research proposal into a review with evidence, counterarguments, and ordered repairs.**
 
-A multi-agent skill for reviewing PhD research proposals. Four specialist roles examine the research question, contribution, source support, and methods. An adjudicator then resolves disagreements against frozen reports and returns located findings with prioritized repairs.
+A reusable Agent skill for PhD applicants and researchers. Four specialists examine the **research question, literature contribution, claim–source relationships, and methods**. An adjudicator resolves disagreements after their reports are frozen.
 
-[中文介绍](README.md) · [Evaluation](docs/EVALUATION.md) · [Validation status](docs/VALIDATION.md)
+[中文](README.md) · [Actual run and full reports](docs/DEMO.md) · [Quick start](#quick-start) · [Project presentation](docs/PROJECT_COPY.md)
+
+## What you get
+
+| Input | Process | Output |
+|---|---|---|
+| One fixed proposal or concept note | S0 scope/version record → S1–S4 specialist reviews → seal verification → S5 adjudication | Verdict, exact evidence locations, strongest counterarguments, resolution criteria, and up to three prioritized repairs |
+
+The proposal stays unchanged. Keep previous human feedback separate until the verdict is frozen.
+
+**[See the actual demonstration →](docs/DEMO.md)**  
+The demonstration uses a fictional diagnostic excerpt and preserves the role outputs and verification record. It shows the output of this workflow; one example cannot establish general review accuracy. Reports are in Chinese, with an English overview in the demonstration guide.
 
 ## Why it exists
 
-After several rounds of writing with an AI assistant, the conversation contains explanations, accepted judgments, and reasons for earlier revisions. A review in that same context may rely on information a reader cannot find in the submitted text.
+After several rounds of AI-assisted writing, the conversation contains explanations and accepted judgments that may never have reached the proposal itself. A reader sees the submitted text.
 
-Blind RP Review withholds that history from its specialist reviewers. Each role must establish its findings from the selected proposal and permitted evidence. Prior human feedback becomes available only after the review is frozen.
+This workflow gives specialists fresh contexts and scoped inputs so they must establish their findings from that text and the permitted evidence.
 
-## What the workflow provides
+## Design choices
 
-- **Fresh review contexts.** In full mode, specialists receive scoped inputs without the parent conversation, earlier reviews, or expected answers.
-- **Four focused audits.** Question, contribution, sources, and methods are examined separately before the adjudicator handles overlap and disagreement.
-- **A defence test for critical findings.** A blocking judgment needs an exact locator, a material consequence, and an explanation of why the strongest supported defence fails. A credible fallback can lower severity.
-- **Version-specific conclusions.** File seals are checked before adjudication. Changed inputs invalidate affected downstream results until the new version is reviewed.
-- **Repairs with acceptance criteria.** Important findings state what evidence or change would clear them. The final report recommends up to three ordered repairs.
+| Mechanism | Problem addressed | Inspectable result |
+|---|---|---|
+| Fresh contexts and explicit inputs | Earlier feedback can influence a new review | Declared inputs and isolation method |
+| Four specialist scopes | Broad feedback can hide where an argument fails | Located findings about questions, contribution, sources, and inference |
+| Strongest-defence test | A serious-looking concern may have a credible fallback | Defence, residual problem, and calibrated severity |
+| Frozen reports and file seals | Changing a draft mid-review can invalidate conclusions | SHA-256 and byte counts tied to the reviewed version |
+| Evidence-based adjudication | Votes cannot resolve a substantive contradiction | Explained disagreements and acceptance criteria for repairs |
 
-## When to use it
+These are implemented workflow constraints. Superiority over another review method requires a separate controlled comparison.
 
-Review a completed proposal, reassess a draft after extensive AI-assisted editing, compare a frozen review with human feedback, or check whether a revision resolves earlier findings.
+## Quick start
 
-“Blind” refers to withheld prior feedback and conversation history. It does not imply author anonymization or statistically independent model judgments. Record whether file access restrictions are host-enforced or instruction-based.
+### 1. Requirements
 
-## Try it
+- An Agent host that reads local files and runs Python. The published demonstration uses Codex desktop.
+- Python 3.10+; the seal script uses only the standard library.
+- Full mode needs child contexts that inherit **no parent conversation**. Without them, the workflow declares reduced isolation from the start.
+- PDF/Word extraction is supplied by the host. Use the Markdown fixture for a first trial.
 
-Clone the repository into your host's skill directory using the local folder name `stress-test-phd-rp`. Start a new session and confirm discovery. Compare an existing installation before replacing it.
+This repository supplies skill instructions, role specifications, and a sealing script. Model execution, role scheduling, document parsing, and any model charges are supplied by your host.
 
-```text
-git clone https://github.com/Lllinkovo/blind-rp-review.git stress-test-phd-rp
+### 2. Install in Codex
+
+Windows PowerShell:
+
+```powershell
+git clone https://github.com/Lllinkovo/blind-rp-review.git "$HOME/.agents/skills/stress-test-phd-rp"
 ```
+
+macOS / Linux:
+
+```bash
+git clone https://github.com/Lllinkovo/blind-rp-review.git "$HOME/.agents/skills/stress-test-phd-rp"
+```
+
+This uses the user-level discovery directory in the current [official OpenAI documentation](https://learn.chatgpt.com/docs/build-skills). Start a new session and select `$stress-test-phd-rp`; restart Codex if discovery has not updated. Compare an existing installation before replacing it.
+
+Other hosts require their own skill discovery and child-context setup. This demonstration establishes behavior only in the recorded Codex environment.
+
+### 3. Request a review
+
+Replace `proposal.md` with your proposal path:
 
 ```text
 Use $stress-test-phd-rp to review proposal.md.
-Keep the proposal unchanged. Use fresh contexts without parent history.
-Give the strongest defensible objection, exact evidence, its strongest
-counterargument, and prioritized repairs.
+Keep the proposal unchanged. Use fresh specialist contexts without parent
+history and only their declared inputs. Check host support first and record
+the actual isolation mode. Freeze the verdict before giving exact evidence,
+the strongest counterargument, and up to three prioritized repairs.
+Save reports and seals in a separate run directory.
 ```
 
-Requires a file-capable agent and Python 3.10+ for report seals. Independent mode requires fresh child contexts; a single-context run must declare reduced isolation. Document extraction and model processing are supplied by the host.
+To rerun the public example, use `examples/case-01/proposal.md` inside the installation. Do not give reviewers the published reports or `evals/expected.json`; a context that has seen the answers must be replaced.
 
-The skill does not include an autonomous agent runner. It supplies instructions, scoped role specifications, an output schema, and a standard-library file-sealing tool.
-
-## Check the package
+## Workflow and outputs
 
 ```text
+Proposal → S0 scope and version record
+              ├─ S1 object, question, field
+              ├─ S2 literature, gap, contribution
+              ├─ S3 claims and sources
+              └─ S4 methods, inference, access
+                       ↓ freeze reports and reverify inputs
+                   S5 adjudication
+                       ↓
+           verdict + findings + prioritized repairs
+                       ↓ optional
+              comparison with human feedback
+```
+
+| Verdict | Meaning |
+|---|---|
+| BLOCK | A demonstrated central failure survives the strongest supported defence |
+| MAJOR REVISION | Material weaknesses remain, with a credible repair preserving the project |
+| PASS FOR HUMAN REVIEW | No critical or major defect remains within this bounded review |
+
+A run normally produces `S0_MANIFEST.md`, `S1_REPORT.md` through `S5_REPORT.md`, local seals, and a separate dispatch log. Findings include locators, evidence, consequences, counterarguments, confidence, and conditions for resolution. See the [output schema](references/output-schema.md).
+
+## What “blind” means
+
+Prior feedback, expected answers, and parent history are withheld. Author identities are not automatically anonymized. Fresh contexts can still share model biases. Instruction-based input restrictions are declared as such; file hashes establish byte consistency only.
+
+Hosts without fresh contexts use `REDUCED_ISOLATION_SINGLE_CONTEXT`. A breach in a run claiming independence produces `RUN_INVALID_ISOLATION_FAILURE` and requires rerunning affected work.
+
+## Validation and maintenance
+
+- **12 seal CLI tests pass**, covering edits, path changes, malformed records, and overwrite protection.
+- See the [actual run](docs/DEMO.md) and [validation record](docs/VALIDATION.md) for observed behavior and remaining evaluation.
+- The [evaluation guide](docs/EVALUATION.md) describes three fictional fixtures. Once used to guide revisions, a public fixture is a regression case; generalization needs new cases.
+
+```bash
 python -B -m unittest discover -s tests -v
 ```
 
-[Evaluation cases](docs/EVALUATION.md) are synthetic fixtures, with expected findings held separately. Script tests do not measure academic review accuracy.
+Report misses or unsupported findings through [Issues](https://github.com/Lllinkovo/blind-rp-review/issues), including an anonymized minimal input, host/isolation mode, relevant report excerpts, and evidence for the alternative judgment. Changes should include reproduction steps and before/after results. Keep private proposals, correspondence, credentials, and absolute-path seal sidecars out of public submissions.
 
-This is an **experimental preview**. All 12 seal CLI tests pass. Fresh-context behavioral trials and comparative academic evaluation remain pending. The official skill validator could not run because PyYAML is missing; basic structure and local links were checked separately.
+## Contribution and attribution
 
-## Attribution and license
+Maintained by [Lllinkovo](https://github.com/Lllinkovo). This project translates a practical proposal-review need into S0–S5 roles, explicit input boundaries, frozen reports, Python version checks, fixtures, and tests.
 
-The prototype drew on Cheng-I Wu's [academic-research-skills](https://github.com/Imbad0202/academic-research-skills). This standalone adaptation preserves attribution and describes the changes in [PROVENANCE.md](PROVENANCE.md). It is distributed under [CC BY-NC 4.0](LICENSE). See [release scope and next steps](docs/RELEASE_REVIEW.md).
+The prototype drew on Cheng-I Wu’s [academic-research-skills](https://github.com/Imbad0202/academic-research-skills). This adaptation organizes relevant review concepts into a standalone proposal-review workflow. See [PROVENANCE.md](PROVENANCE.md) for the source and changes. Distributed under **[CC BY-NC 4.0](LICENSE)**.
+
+[Project and interview copy](docs/PROJECT_COPY.md) · [Release scope and next steps](docs/RELEASE_REVIEW.md)
