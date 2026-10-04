@@ -5,7 +5,7 @@
 1. **Mechanical checks:** command-line seals detect changed bytes, reject invalid records, preserve the input, and refuse to overwrite existing seals.
 2. **Review behavior:** fresh reviewers identify material problems without seeing expected findings or previous feedback.
 
-Passing (1) does not establish (2). The synthetic cases below have not yet been reviewed in fresh agent contexts in this candidate's preparation run.
+Passing (1) does not establish (2). A single fresh-context demonstration of C1 is recorded in [DEMO.md](DEMO.md), including the actual specialist and adjudicator outputs. C2 and C3 have not been run. The C1 demonstration was not scored against the expectation file and is not an accuracy benchmark.
 
 ## Synthetic fixtures
 
@@ -43,3 +43,7 @@ Once a case has informed revisions, treat it as a regression case. Evaluate late
 - Stability: sealed inputs and reports still match at adjudication.
 
 Expected labels are provisional author-written fixtures, not an expert gold standard. A reviewer may disagree with a label if its evidence supports the disagreement; record that instead of forcing a pass.
+
+## Public demonstration and future evaluations
+
+The published C1 reports make the case visible as a worked example. Keep those reports out of reviewer inputs when reproducing the mechanics. Use new, unrevealed cases for claims about generalization. Do not retroactively rewrite a frozen report to match its expected label.

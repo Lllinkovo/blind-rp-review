@@ -1,37 +1,41 @@
-# Release review
+# Release scope and next steps
 
-Prepared: 2026-10-03. Updated: 2026-10-04. Scope: first experimental public preview.
+Updated: 2026-10-04. Status: experimental public preview.
 
 Repository: [Lllinkovo/blind-rp-review](https://github.com/Lllinkovo/blind-rp-review).
 
-## Ready for inspection
+## Included
 
-- A standalone entrypoint with four audit modules and an adjudicator.
-- Explicit meanings for independent and reduced-isolation modes.
-- Standard-library seal CLI with input preservation and exclusive sidecar creation.
-- Synthetic cases, held-separate expected findings, and mechanical tests.
-- Chinese and English overview documentation.
+- A standalone skill entrypoint, four specialist modules, an adjudicator, and an output schema.
+- Explicit fresh-context and reduced-isolation modes.
+- A standard-library sealing CLI with input-preservation and overwrite checks.
+- Three synthetic input fixtures and evaluator-only expected findings.
+- Bilingual setup and project documentation.
+- An actual C1 demonstration with recorded inputs, specialist reports, adjudication, and seal checks; see [DEMO.md](DEMO.md).
 
-## Publication scope
+The public maintainer is Lllinkovo. Upstream ARS review concepts are credited in [PROVENANCE.md](../PROVENANCE.md). Copyright, license, and warranty attribution are retained. Distribution uses CC BY-NC 4.0.
 
-The public maintainer is Lllinkovo. Upstream ARS review concepts are credited in PROVENANCE.md; the upstream copyright, license, and warranty disclaimer are preserved. The adaptation is distributed under CC BY-NC 4.0.
+## What the demonstration establishes
 
-The preview includes the skill, supporting protocol, CLI and tests, synthetic fixtures, and documentation. It excludes private preparation logs, actual applicant proposals, correspondence, and runtime seal files.
+The recorded host can run this bounded example through separate specialist contexts and a subsequent adjudication step. The public demonstration preserves observed outputs. It is one short fictional case, with no repeated trials, expert scoring, or matched baseline.
 
-## Next validation work
+See [VALIDATION.md](VALIDATION.md) for the exact state of mechanical and behavioral checks.
 
-1. Run a fresh-context behavioral pilot on the three synthetic cases.
-2. Compare the standalone skill with the earlier ARS-backed workflow on matched inputs.
-3. Publish observed detection, severity disagreements, host limitations, and failure cases.
+## Next maintenance priorities
 
-These items are planned work. The public preview carries no claims of completed behavioral validation.
+1. Run the other two fixtures, recording misses, unsupported findings, and severity disputes.
+2. Compare matched runs with and without the skill, and with the earlier ARS-backed workflow. Keep input, model and tools fixed and report differences in computational budget.
+3. Convert observed failures into regression cases; reserve new unseen cases for later evaluation.
 
-## What has changed from the installed prototype
+These are planned tasks. No recurring automation is enabled by this roadmap.
 
-- ARS is no longer a required runtime dependency in the standalone candidate. This changes its review context and needs behavioral comparison.
-- Hash checks now cover the proposal and neutral manifest before adjudication.
-- Context independence and instruction-based file restrictions are described separately.
-- Reduced-isolation assessments are allowed only with their declared status; an independent run with a breach is invalid.
-- The seal tool rejects source-file overwrite, existing-sidecar overwrite, malformed seals, and a mismatched expected hash before creating a sidecar.
+## Changes from the installed prototype
 
-The installed skill has not been changed. Passing mechanical checks does not establish scholarly validity, predictive accuracy, or equivalence to the earlier ARS-backed workflow.
+- Selected ARS review concepts are adapted into included modules; ARS is no longer a runtime dependency.
+- Seals cover the proposal, S0 and reports before adjudication.
+- Context independence and instruction-based file restrictions are documented separately.
+- A declared reduced-isolation mode is available when fresh contexts are unavailable.
+- The CLI rejects accidental input overwrite, existing-sidecar overwrite, malformed seals and an expected-hash mismatch.
+- Documentation now includes concrete setup commands, an actual run, and a source-based account of the project's contribution.
+
+The original installed skill is unchanged. Private proposals, correspondence, preparation logs and absolute-path seal sidecars are excluded from the public package.
