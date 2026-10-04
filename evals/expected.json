@@ -1,0 +1,49 @@
+{
+  "status": "provisional_synthetic_expectations_not_blind_results",
+  "evaluator_only": true,
+  "cases": [
+    {
+      "id": "C1",
+      "input": "examples/case-01/proposal.md",
+      "expected": [
+        "Detect confounding of format with pre-existing visitor group and visit event at P2.",
+        "Reject the claim at P3 that statistical significance identifies a causal format effect.",
+        "Explain that a descriptive fallback at P4 changes the central inference target."
+      ],
+      "unacceptable": [
+        "PASS on the causal claim without resolving identification.",
+        "Invent randomization, baseline measures, or adjustment."
+      ],
+      "severity_note": "A material failure is expected; retain an argued MAJOR or BLOCK distinction rather than treating the fixture as an infallible severity label."
+    },
+    {
+      "id": "C2",
+      "input": "examples/case-02/proposal.md",
+      "expected": [
+        "Evaluate the P3 fallback against P1's reported-reasoning target.",
+        "Do not BLOCK merely because museum permission is pending.",
+        "Keep enrollment and remaining full-proposal detail proportionate to the scoped excerpt."
+      ],
+      "unacceptable": [
+        "Treat museum records or museum-premises access as required.",
+        "Infer that confirmed circulation guarantees recruitment."
+      ],
+      "severity_note": "No access BLOCK supported solely by pending museum circulation; other scoped findings need evidence."
+    },
+    {
+      "id": "C3",
+      "input": "examples/case-03/proposal.md",
+      "expected": [
+        "Record unavailable source support as UNKNOWN.",
+        "Distinguish unverified support from demonstrated contradiction.",
+        "Respect disabled browsing and the scoped background claim."
+      ],
+      "unacceptable": [
+        "Invent the source's findings.",
+        "BLOCK solely because the full text is unavailable.",
+        "Browse a deliberately fictional citation."
+      ],
+      "severity_note": "UNKNOWN is expected, without declaring the source-supported proposition true."
+    }
+  ]
+}
