@@ -2,7 +2,7 @@
 
 Prepared: 2026-10-03. Updated: 2026-10-04. Scope: first experimental public preview.
 
-Repository: [link20030114-ai/blind-rp-review](https://github.com/link20030114-ai/blind-rp-review).
+Repository: [Lllinkovo/blind-rp-review](https://github.com/Lllinkovo/blind-rp-review).
 
 ## Ready for inspection
 
@@ -14,7 +14,7 @@ Repository: [link20030114-ai/blind-rp-review](https://github.com/link20030114-ai
 
 ## Publication scope
 
-The public maintainer is link20030114-ai. Upstream ARS review concepts are credited in PROVENANCE.md; the upstream copyright, license, and warranty disclaimer are preserved. The adaptation is distributed under CC BY-NC 4.0.
+The public maintainer is Lllinkovo. Upstream ARS review concepts are credited in PROVENANCE.md; the upstream copyright, license, and warranty disclaimer are preserved. The adaptation is distributed under CC BY-NC 4.0.
 
 The preview includes the skill, supporting protocol, CLI and tests, synthetic fixtures, and documentation. It excludes private preparation logs, actual applicant proposals, correspondence, and runtime seal files.
 
