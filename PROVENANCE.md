@@ -2,7 +2,7 @@
 
 ## Local source
 
-Blind RP Review was adapted on 2026-10-03 from the locally maintained `stress-test-phd-rp` skill. The public preview is maintained by [link20030114-ai](https://github.com/link20030114-ai). The source snapshot and per-file hashes are retained in the private preparation log.
+Blind RP Review was adapted on 2026-10-03 from the locally maintained `stress-test-phd-rp` skill. The public preview is maintained by [Lllinkovo](https://github.com/Lllinkovo). The source snapshot and per-file hashes are retained in the private preparation log.
 
 The candidate preserves the four specialist scopes, adjudication criteria, finding schema, and severity rules. Changes include a standalone entrypoint, explicit context-boundary reporting, proposal/S0 verification, consistent reduced-isolation handling, safer sidecar creation, mechanical tests, and synthetic evaluation fixtures.
 

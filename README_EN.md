@@ -31,7 +31,7 @@ Review a completed proposal, reassess a draft after extensive AI-assisted editin
 Clone the repository into your host's skill directory using the local folder name `stress-test-phd-rp`. Start a new session and confirm discovery. Compare an existing installation before replacing it.
 
 ```text
-git clone https://github.com/link20030114-ai/blind-rp-review.git stress-test-phd-rp
+git clone https://github.com/Lllinkovo/blind-rp-review.git stress-test-phd-rp
 ```
 
 ```text

@@ -67,10 +67,10 @@ Blind RP Review 将既有评价与写作上下文移出专项审查输入，要�
 
 ## 使用
 
-仓库：[link20030114-ai/blind-rp-review](https://github.com/link20030114-ai/blind-rp-review)。将本仓库克隆到宿主的 skill 目录，保留本地目录名 `stress-test-phd-rp`，然后在新会话中确认技能可用。
+仓库：[Lllinkovo/blind-rp-review](https://github.com/Lllinkovo/blind-rp-review)。将本仓库克隆到宿主的 skill 目录，保留本地目录名 `stress-test-phd-rp`，然后在新会话中确认技能可用。
 
 ```text
-git clone https://github.com/link20030114-ai/blind-rp-review.git stress-test-phd-rp
+git clone https://github.com/Lllinkovo/blind-rp-review.git stress-test-phd-rp
 ```
 
 已有同名技能时，请先比较两个版本，再决定使用哪一份。
